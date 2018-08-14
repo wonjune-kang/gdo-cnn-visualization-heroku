@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn gdo_cnn_visualization:app

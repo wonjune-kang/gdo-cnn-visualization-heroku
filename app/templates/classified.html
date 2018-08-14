@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <center>
+        <img src="data:image/png;base64,{{ heatmap }}" width="50%">
+        <br><br>
+        <img src="data:image/png;base64,{{ gradcam }}" width="50%">
+        <br><br>
+        <p>
+            {% for label, probability in predictions %}
+                <p>{{ label }}: {{ probability }}%</p>
+            {% endfor %}
+        </p>
+    </center>
+    <form action="{{ url_for('index') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p align="center">{{ form.return_home }}</p>
+    </form>
+{% endblock %}

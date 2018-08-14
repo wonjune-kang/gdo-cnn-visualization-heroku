@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <center>
+        <br>
+        <p>Layer: {{ name }}</p>
+        <p>Activation Function: {{ activation }}</p>
+        <p>Number of Filters: {{ num_filters }}</p>
+        <p>Filter Dimensions: {{ dims }}</p>
+        <p>Filter Strides: {{ strides }}</p>
+        <br>
+    </center>
+
+    <form action="{{ url_for('index') }}" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p align="center">{{ form.return_home }}</p>
+    </form>
+{% endblock %}

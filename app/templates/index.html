@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Visualization of Deep Convolutional Neural Networks (VGG16)</h2>
+
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>{{ form.select_image }}</p>
+        <p>{{ form.select_block }}</p>
+        <p>{{ form.view }}</p>
+        <p>{{ form.classify }}</p>
+        <p>{{ form.visualize_filters }}</p>
+        <p>{{ form.layer_info }}</p>
+    </form>
+{% endblock %}

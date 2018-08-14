@@ -1,0 +1,17 @@
+<html>
+    <font face="Helvetica" size="5">
+<!--     <style>body { background-color: #D0EEEE; }</style>-->
+    <head>
+        {% if title %}
+            <title>CNN Visualization - {{ title }}</title>
+        {% else %}
+            <title>CNN Visualization</title>
+        {% endif %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+    </font>
+</html>

@@ -26,27 +26,26 @@ def index():
 @app.route('/input/<label>', methods=['GET', 'POST'])
 def selected(label):
     # Path to selected input image.
-    input_image = '/static/images/' + label + '.jpg'
+    path_to_input = '/static/images/' + label + '.jpg'
 
     # Return to index page.
     form = ReturnForm()
     if form.validate_on_submit():
         return redirect(url_for('index'))
 
-    return render_template('selected.html', input_image=input_image,
+    return render_template('selected.html', input_image=path_to_input,
                            label=label, form=form)
 
 
 @app.route('/classified/<label>', methods=['GET', 'POST'])
 def classified(label):
-    # Path to selected input image.
-    input_image = './app/static/images/' + label + '.jpg'
+    # Paths to selected input image, heatmap, and guided Grad-CAM.
+    path_to_input = './app/static/images/' + label + '.jpg'
+    path_to_heatmap = '/static/cam_heatmaps/' + label + '.png'
+    path_to_guided = '/static/cam_guided/' + label + '.png'
 
     # Compute top 5 predictions.
-    predictions = predict(input_image)
-
-    # Generate heatmap and Grad-CAM for image.
-    heatmap, gradcam = generate_gradcam(input_image)
+    predictions = predict(path_to_input)
 
     # Return to index page.
     form = ReturnForm()
@@ -54,13 +53,14 @@ def classified(label):
         return redirect(url_for('index'))
 
     return render_template('classified.html', predictions=predictions,
-                           heatmap=heatmap, gradcam=gradcam, label=label, form=form)
+                           heatmap=path_to_heatmap, guided=path_to_guided,
+                           label=label, form=form)
 
 
 @app.route('/<label>/<block>', methods=['GET', 'POST'])
 def visualize_block_filters(label, block):
-    path_to_image = './app/static/images/' + label + '.jpg'
-    filter_outputs = visualize_filter_outputs(path_to_image, block)
+    path_to_input = './app/static/images/' + label + '.jpg'
+    filter_outputs = visualize_filter_outputs(path_to_input, block)
 
     # Return to index page.
     form = ReturnForm()
@@ -82,5 +82,8 @@ def layer_info(block):
     return render_template('layer_info.html', name=name, activation=activation,
                            num_filters=num_filters, dims=dims, strides=strides,
                            form=form)
+
+
+
 
 

@@ -7,8 +7,6 @@ cycler==0.10.0
 Flask==1.0.2
 Flask-Login==0.4.1
 Flask-Migrate==2.2.1
-Flask-SocketIO==3.0.1
-Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 gast==0.2.0
 grpcio==1.13.0
@@ -23,7 +21,6 @@ kiwisolver==1.0.1
 Mako==1.0.7
 Markdown==2.6.11
 MarkupSafe==1.0
-matplotlib==2.2.2
 numpy==1.14.5
 opencv-python==3.4.2.17
 Pillow==5.2.0
@@ -33,13 +30,11 @@ python-dateutil==2.7.3
 python-dotenv==0.9.1
 python-editor==1.0.3
 python-engineio==2.2.0
-python-igraph==0.7.1.post6
 python-socketio==2.0.0
 pytz==2018.5
 PyYAML==3.13
 scipy==1.1.0
 six==1.11.0
-SQLAlchemy==1.2.10
 tensorboard==1.9.0
 tensorflow==1.9.0
 termcolor==1.1.0

@@ -10,7 +10,8 @@ from misc_functions import crop_and_resize, get_filter_indices
 
 
 # Define VGG16 model.
-model = vgg16.VGG16(weights='imagenet')
+# model = vgg16.VGG16(weights='imagenet')
+model = None
 graph = tf.get_default_graph()
 
 

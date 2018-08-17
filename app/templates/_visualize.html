@@ -1,7 +1,7 @@
 <tr>
-    {% for filter_viz, filter_out in four_filters %}
+    {% for filter_idx in four_filters %}
         <td>
-            <img src="{{ filter_viz }}" width="48.5%"><img src="{{ filter_out }}" width="48.5%">
+            <img src="/static/filter_visualizations/{{ layer }}/{{ filter_idx }}.png" width="48.5%"><img src="/static/filter_outputs/{{ label }}/{{ layer }}/{{ filter_idx }}.png" width="48.5%">
         </td>
     {% endfor %}
 </tr>

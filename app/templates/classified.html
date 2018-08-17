@@ -3,9 +3,9 @@
 {% block content %}
     <br>
     <center>
-        <img src="{{ heatmap }}" height="50%">
+        <img src="/static/cam_heatmaps/{{ label }}.png" height="50%">
         <br><br>
-        <img src="{{ guided }}" height="50%">
+        <img src="/static/cam_guided/{{ label }}.png" height="50%">
         <br><br>
         <p>
             {% for label, probability in predictions %}

@@ -104,7 +104,7 @@ def visualize_layer_filters(label, layer):
 
 @app.route('/info/<layer>', methods=['GET', 'POST'])
 def layer_info(layer):
-    path_to_info = 'static/layer_info/' + layer + '.txt'
+    path_to_info = '/static/layer_info/' + layer + '.txt'
 
     print("Current working directory: " + os.getcwd())
     info = []

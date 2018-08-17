@@ -1,0 +1,5 @@
+orange		86.71%
+lemon		9.67%
+banana		3.36%
+strawberry	0.09%
+pineapple	0.05%

@@ -1,0 +1,5 @@
+Newfoundland		80.68%
+Tibetan_mastiff		17.73%
+flat-coated_retriever	0.88%
+Leonberg		0.33%
+groenendael		0.25%

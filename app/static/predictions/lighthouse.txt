@@ -1,0 +1,5 @@
+beacon		76.42%
+breakwater	23.57%
+promontory	0.00%
+lifeboat	0.00%
+container_ship	0.00%

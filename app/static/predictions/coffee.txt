@@ -1,0 +1,5 @@
+espresso	69.23%
+cup		10.44%
+ice_cream	2.73%
+chocolate_sauce	2.51%
+goblet		2.11%

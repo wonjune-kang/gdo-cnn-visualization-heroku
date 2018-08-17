@@ -1,0 +1,5 @@
+red_wine	87.73%
+wine_bottle	5.62%
+goblet		5.14%
+beer_glass	1.13%
+corkscrew	0.17%

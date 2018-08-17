@@ -66,7 +66,6 @@ def visualize_all_filters(label, layer):
 def layer_info(layer):
     def parse_layer_info(path):
         info = []
-        print("Current working directory: " + os.getcwd())
         with open(path) as f:
             for line in f:
                 try:
@@ -78,7 +77,7 @@ def layer_info(layer):
 
     print(os.listdir('.'))
     print(os.listdir('./app'))
-    print(os.listdir('./app/static'))
+    print(os.listdir('./app/static/layer_info'))
 
     path_to_info = './app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)

@@ -1,0 +1,5 @@
+schooner	55.41%
+yawl		26.45%
+catamaran	6.95%
+pirate		5.62%
+trimaran	1.87%

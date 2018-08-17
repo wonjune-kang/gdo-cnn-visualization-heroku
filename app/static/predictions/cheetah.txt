@@ -1,0 +1,5 @@
+cheetah		99.43%
+leopard		0.43%
+jaguar		0.12%
+lynx		0.01%
+snow_leopard	0.00%

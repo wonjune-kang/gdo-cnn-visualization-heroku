@@ -1,0 +1,5 @@
+red_fox		54.24%
+kit_fox		44.63%
+grey_fox	0.87%
+coyote		0.17%
+red_wolf	0.04%

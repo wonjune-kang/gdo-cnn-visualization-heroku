@@ -1,0 +1,5 @@
+violin		58.82%
+cello		29.81%
+acoustic_guitar	9.25%
+electric_guitar	0.88%
+pick		0.69%

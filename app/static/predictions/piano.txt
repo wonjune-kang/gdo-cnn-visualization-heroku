@@ -1,0 +1,5 @@
+grand_piano	61.42%
+violin		6.61%
+cello		4.73%
+upright		4.61%
+chime		3.85%

@@ -1,0 +1,5 @@
+hummingbird	99.99%
+jacamar		0.01%
+bee_eater	0.00%
+bulbul		0.00%
+weevil		0.00%

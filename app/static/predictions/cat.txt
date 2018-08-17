@@ -1,0 +1,5 @@
+snow_leopard	28.38%
+tiger_cat	23.58%
+Egyptian_cat	17.68%
+lynx		16.53%
+tabby		4.57%

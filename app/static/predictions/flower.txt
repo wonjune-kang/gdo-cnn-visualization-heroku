@@ -1,0 +1,5 @@
+daisy		   56.08%
+bee		   17.34%
+fly		   4.33%
+sulphur_butterfly  4.28%
+ant		   2.54%

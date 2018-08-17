@@ -1,0 +1,5 @@
+Granny_Smith	98.77%
+lemon		0.43%
+fig		0.21%
+orange		0.20%
+strawberry	0.11%

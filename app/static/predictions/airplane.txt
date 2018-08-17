@@ -1,0 +1,5 @@
+airliner	94.82%
+wing		3.70%
+warplane	1.33%
+space_shuttle	0.12%
+airship		0.03%

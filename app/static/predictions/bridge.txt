@@ -1,0 +1,5 @@
+pier			56.29%
+suspension_bridge	21.52%
+fireboat		5.32%
+container_ship		3.70%
+chainlink_fence		2.62%

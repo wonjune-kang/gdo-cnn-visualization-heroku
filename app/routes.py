@@ -45,7 +45,7 @@ def classified(label):
     path_to_guided = '/static/cam_guided/' + label + '.png'
 
     # Get the top 5 predictions.
-    predictions = parse_predictions('./app/static/predictions/' + label + '.txt')
+    predictions = parse_predictions('/static/predictions/' + label + '.txt')
 
     # Return to index page.
     form = ReturnForm()
@@ -63,7 +63,7 @@ def visualize_layer_filters(label, layer):
     path_to_outputs = '/static/filter_outputs/' + label + '/' + layer + '/'
     
     viz_and_outputs = []
-    filter_indices = get_filter_indices('./app/'+path_to_visualizations)
+    filter_indices = get_filter_indices(path_to_visualizations)
     for idx in filter_indices:
         visualization = path_to_visualizations + '%d.png' % idx
         output = path_to_outputs + '%d.png' % idx
@@ -80,7 +80,7 @@ def visualize_layer_filters(label, layer):
 
 @app.route('/info/<layer>', methods=['GET', 'POST'])
 def layer_info(layer):
-    path_to_info = './app/static/layer_info/' + layer + '.txt'
+    path_to_info = 'static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
 
     form = ReturnForm()

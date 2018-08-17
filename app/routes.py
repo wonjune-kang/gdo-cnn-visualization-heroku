@@ -77,6 +77,8 @@ def layer_info(layer):
         return tuple(info)
 
     print(os.listdir('.'))
+    print(os.listdir('./app'))
+    print(os.listdir('./app/static'))
 
     path_to_info = './app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)

@@ -106,8 +106,9 @@ def visualize_layer_filters(label, layer):
 def layer_info(layer):
     path_to_info = './app/static/layer_info/' + layer + '.txt'
 
+    print(os.getcwd())
     info = []
-    with open(path) as f:
+    with open(path_to_info) as f:
         for line in f:
             try:
                 info.append(eval(line.strip()))

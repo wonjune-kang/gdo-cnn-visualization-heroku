@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request
 from app import app
 from app.forms import SelectionForm, ReturnForm
 import os
-from misc_functions import get_filter_indices, parse_predictions, parse_layer_info
+from misc_functions import get_filter_indices, parse_predictions
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -64,6 +64,19 @@ def visualize_all_filters(label, layer):
 
 @app.route('/info/<layer>', methods=['GET', 'POST'])
 def layer_info(layer):
+
+    def parse_layer_info(path):
+        info = []
+        print("Current working directory: " + os.getcwd())
+        with open(path) as f:
+            for line in f:
+                try:
+                    info.append(eval(line.strip()))
+                except:
+                    info.append(line.strip())
+        f.close()
+        return tuple(info)
+
     path_to_info = './app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
 
@@ -74,6 +87,5 @@ def layer_info(layer):
     return render_template('layer_info.html', name=name, activation=activation,
                            num_filters=num_filters, dims=dims, strides=strides,
                            form=form)
-
 
 

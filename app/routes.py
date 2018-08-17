@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from app import app
 from app.forms import SelectionForm, ReturnForm
-from misc_functions import get_filter_indices, parse_predictions, parse_layer_info
+import os
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -20,7 +20,6 @@ def index():
         elif form.layer_info.data:
             return redirect(url_for('layer_info', layer=form.select_layer.data))
 
-    print(form.errors)
     return render_template('index.html', form=form)
 
 
@@ -45,7 +44,7 @@ def classified(label):
     path_to_guided = '/static/cam_guided/' + label + '.png'
 
     # Get the top 5 predictions.
-    predictions = parse_predictions('/static/predictions/' + label + '.txt')
+    predictions = parse_predictions('./app/static/predictions/' + label + '.txt')
 
     # Return to index page.
     form = ReturnForm()
@@ -63,7 +62,7 @@ def visualize_layer_filters(label, layer):
     path_to_outputs = '/static/filter_outputs/' + label + '/' + layer + '/'
     
     viz_and_outputs = []
-    filter_indices = get_filter_indices(path_to_visualizations)
+    filter_indices = get_filter_indices('./app'+path_to_visualizations)
     for idx in filter_indices:
         visualization = path_to_visualizations + '%d.png' % idx
         output = path_to_outputs + '%d.png' % idx
@@ -80,7 +79,7 @@ def visualize_layer_filters(label, layer):
 
 @app.route('/info/<layer>', methods=['GET', 'POST'])
 def layer_info(layer):
-    path_to_info = 'static/layer_info/' + layer + '.txt'
+    path_to_info = './app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
 
     form = ReturnForm()
@@ -90,5 +89,61 @@ def layer_info(layer):
     return render_template('layer_info.html', name=name, activation=activation,
                            num_filters=num_filters, dims=dims, strides=strides,
                            form=form)
+
+
+# Given a path to a directory with images with extensions (.jpg, .png, etc.),
+# returns a sorted list of image choices for a WTForm SelectForm.
+def create_image_choices(path):
+    choices = []
+    for choice in os.listdir(path):
+        if choice[0] != '.':
+            file = choice[:-4]
+            choices.append((file, file))
+
+    choices.sort()
+    return choices
+
+
+# Given a path to a directory with filter visualizations for a VGG16 block,
+# returns a list of filter indices to be processed for the layer of that block.
+def get_filter_indices(path):
+    cwd = os.getcwd()
+    print(cwd)
+    indices = []
+    for file in os.listdir(path):
+        if file[0] != '.':
+            try:
+                index = file[:-4]
+                indices.append(int(index))
+            except:
+                print('Invalid index: ' + file + '. Must be an integer.')
+
+    indices.sort()
+    return indices
+
+
+def parse_predictions(path):
+    predictions = []
+    with open(path) as f:
+        for line in f:
+            to_list = tuple(line.strip().split())
+            predictions.append(to_list)
+    
+    f.close()
+    return predictions
+
+
+def parse_layer_info(path):
+    info = []
+    with open(path) as f:
+        for line in f:
+            try:
+                info.append(eval(line.strip()))
+            except:
+                info.append(line.strip())
+    f.close()
+    return tuple(info)
+
+
 
 

@@ -44,8 +44,8 @@ def classified(label):
     path_to_guided = '/static/cam_guided/' + label + '.png'
 
     # Get the top 5 predictions.
-    predictions = parse_predictions('./app/static/predictions/' + label + '.txt')
-
+    # predictions = parse_predictions('./app/static/predictions/' + label + '.txt')
+    predictions = None
     # Return to index page.
     form = ReturnForm()
     if form.validate_on_submit():

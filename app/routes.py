@@ -77,7 +77,7 @@ def layer_info(layer):
         f.close()
         return tuple(info)
 
-    path_to_info = './app/static/layer_info/' + layer + '.txt'
+    path_to_info = '/app/app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
 
     form = ReturnForm()

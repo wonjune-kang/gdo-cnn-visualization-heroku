@@ -7,7 +7,7 @@
             td { padding: 4px; }
         </style>
         <table>
-            {% for four_filters in filter_outputs|batch(4) %}
+            {% for four_filters in viz_and_outputs|batch(4) %}
                 {% include '_visualize.html' %}
             {% endfor %}
         </table>

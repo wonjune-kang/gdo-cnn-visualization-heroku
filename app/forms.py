@@ -8,17 +8,17 @@ class SelectionForm(FlaskForm):
     select_image = SelectField('Select Image', validators=[DataRequired()],
                                choices=create_image_choices('./app/static/images/'))
 
-    select_block = SelectField('Select Block', validators=[DataRequired()],
-                                               choices=[('block1', 'block 1'),
-                                                        ('block2', 'block 2'),
-                                                        ('block3', 'block 3'),
-                                                        ('block4', 'block 4'),
-                                                        ('block5', 'block 5')])
+    select_layer = SelectField('Select Layer', validators=[DataRequired()],
+                               choices=[('block1_conv1', 'block1_conv1'),
+                                        ('block2_conv1', 'block2_conv1'),
+                                        ('block3_conv1', 'block3_conv1'),
+                                        ('block4_conv1', 'block4_conv1'),
+                                        ('block5_conv1', 'block5_conv1')])
 
     view = SubmitField("View Selected Image")
     classify = SubmitField("Classify Selected Image")
-    visualize_filters = SubmitField("Visualize Filters for Block")
-    layer_info = SubmitField('Block Info')
+    visualize_filters = SubmitField("Visualize Filters for Layer")
+    layer_info = SubmitField('Layer Info')
 
 
 class ReturnForm(FlaskForm):

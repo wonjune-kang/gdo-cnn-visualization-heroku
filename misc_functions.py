@@ -1,22 +1,4 @@
-from PIL import Image
-import base64
 import os
-
-
-# Scales an image such that its shorter side is equal to new_side, then takes
-# the center crop. Default value of new_side is 224 for ImageNet preprocessing.
-def crop_and_resize(image, new_side=224):
-    width, height = image.size
-    shorter = min(width, height)
-
-    left = (width - shorter)/2
-    top = (height - shorter)/2
-    right = (width + shorter)/2
-    bottom = (height + shorter)/2
-
-    cropped = image.crop((left, top, right, bottom))
-    return cropped.resize((new_side, new_side), Image.ANTIALIAS)
-
 
 # Given a path to a directory with images with extensions (.jpg, .png, etc.),
 # returns a sorted list of image choices for a WTForm SelectForm.
@@ -37,10 +19,36 @@ def get_filter_indices(path):
     indices = []
     for file in os.listdir(path):
         if file[0] != '.':
-            index = file[:-4]
-            indices.append(int(index))
+            try:
+                index = file[:-4]
+                indices.append(int(index))
+            except:
+                print('Invalid index: ' + file + '. Must be an integer.')
 
     indices.sort()
     return indices
+
+
+def parse_predictions(path):
+    predictions = []
+    with open(path) as f:
+        for line in f:
+            to_list = tuple(line.strip().split())
+            predictions.append(to_list)
+    
+    f.close()
+    return predictions
+
+
+def parse_layer_info(path):
+    info = []
+    with open(path) as f:
+        for line in f:
+            try:
+                info.append(eval(line.strip()))
+            except:
+                info.append(line.strip())
+    f.close()
+    return tuple(info)
 
 

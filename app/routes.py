@@ -56,13 +56,38 @@ def classified(label):
                            label=label, form=form)
 
 
+# Given a path to a directory with filter visualizations for a VGG16 block,
+# returns a list of filter indices to be processed for the layer of that block.
+def get_filter_indices(path):
+    indices = []
+    for file in os.listdir(path):
+        if file[0] != '.':
+            try:
+                index = file[:-4]
+                indices.append(int(index))
+            except:
+                print('Invalid index: ' + file + '. Must be an integer.')
+
+    indices.sort()
+    return indices
+
 @app.route('/<label>/<layer>', methods=['GET', 'POST'])
 def visualize_layer_filters(label, layer):
     path_to_visualizations = '/static/filter_visualizations/' + layer + '/'
     path_to_outputs = '/static/filter_outputs/' + label + '/' + layer + '/'
-    
     viz_and_outputs = []
-    filter_indices = get_filter_indices('./app'+path_to_visualizations)
+
+    filter_indices = []
+    for file in os.listdir('./app/'+path_to_visualizations):
+        if file[0] != '.':
+            try:
+                index = file[:-4]
+                filter_indices.append(int(index))
+            except:
+                print('Invalid index: ' + file + '. Must be an integer.')
+
+    filter_indices.sort()
+
     for idx in filter_indices:
         visualization = path_to_visualizations + '%d.png' % idx
         output = path_to_outputs + '%d.png' % idx
@@ -80,7 +105,17 @@ def visualize_layer_filters(label, layer):
 @app.route('/info/<layer>', methods=['GET', 'POST'])
 def layer_info(layer):
     path_to_info = './app/static/layer_info/' + layer + '.txt'
-    name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
+
+    info = []
+    with open(path) as f:
+        for line in f:
+            try:
+                info.append(eval(line.strip()))
+            except:
+                info.append(line.strip())
+    f.close()
+
+    name, activation, num_filters, dims, strides = tuple(info)
 
     form = ReturnForm()
     if form.validate_on_submit():
@@ -89,37 +124,6 @@ def layer_info(layer):
     return render_template('layer_info.html', name=name, activation=activation,
                            num_filters=num_filters, dims=dims, strides=strides,
                            form=form)
-
-
-# Given a path to a directory with images with extensions (.jpg, .png, etc.),
-# returns a sorted list of image choices for a WTForm SelectForm.
-def create_image_choices(path):
-    choices = []
-    for choice in os.listdir(path):
-        if choice[0] != '.':
-            file = choice[:-4]
-            choices.append((file, file))
-
-    choices.sort()
-    return choices
-
-
-# Given a path to a directory with filter visualizations for a VGG16 block,
-# returns a list of filter indices to be processed for the layer of that block.
-def get_filter_indices(path):
-    cwd = os.getcwd()
-    print(cwd)
-    indices = []
-    for file in os.listdir(path):
-        if file[0] != '.':
-            try:
-                index = file[:-4]
-                indices.append(int(index))
-            except:
-                print('Invalid index: ' + file + '. Must be an integer.')
-
-    indices.sort()
-    return indices
 
 
 def parse_predictions(path):
@@ -131,18 +135,6 @@ def parse_predictions(path):
     
     f.close()
     return predictions
-
-
-def parse_layer_info(path):
-    info = []
-    with open(path) as f:
-        for line in f:
-            try:
-                info.append(eval(line.strip()))
-            except:
-                info.append(line.strip())
-    f.close()
-    return tuple(info)
 
 
 

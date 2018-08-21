@@ -67,4 +67,3 @@ def load_to_gdo(label, layer):
 
 
 
-

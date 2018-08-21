@@ -1,13 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    table {
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 3vh;
+    }
+
+    th {
+        font-size: 4vh;
+    }
+</style>
+
+<center>
     <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>{{ form.select_image }}</p>
-        <p>{{ form.select_layer }}</p>
-        <p>{{ form.view }}</p>
-        <p>{{ form.classify }}</p>
-        <p>{{ form.visualize_filters }}</p>
-        <p>{{ form.layer_info }}</p>
+        <table>
+            <th height="35%">
+                <b>Visualizing Deep Convolutional Neural Networks</b>
+            </th>
+            {{ form.hidden_tag() }}
+
+            <tr><td><b>Select the image to view:      {{ form.select_image }}</td></tr>
+
+            <tr><td><b>Select the layer to view:      {{ form.select_layer }}</td></tr>
+
+            <tr><td>{{ form.visualize }}</td></tr>
+            <tr height="15%"></tr>
+        </table>
     </form>
+</center>
 {% endblock %}

@@ -15,4 +15,4 @@ class SelectionForm(FlaskForm):
                                         ('block4_conv1', 'block4_conv1'),
                                         ('block5_conv1', 'block5_conv1')])
 
-    view = SubmitField("Visualize")
+    visualize = SubmitField("Visualize")

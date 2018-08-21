@@ -6,6 +6,7 @@
         height: 100%;
         width: 100%;
         vertical-align: middle;
+        border-collapse: collapse;
     }
 
     th {
@@ -15,8 +16,14 @@
         font-size: 3vh;
     }
 
+    div {
+        display: inline-block;
+        box-shadow: 10px 10px 7px grey;
+        height: 100%;
+    }
+
     img {
-        width: 40%;
+        height: 100%;
     }
 </style>
 
@@ -26,10 +33,14 @@
     <tr><th>(Grad-CAM)</th></tr>
     <tr></tr>
     <tr>
-        <td align="center"><img src="/static/cam_heatmaps/{{ label }}.png"></td>
+        <td align="center">
+            <div><img src="/static/cam_heatmaps/{{ label }}.png"></div>
+        </td>
     </tr>
     <tr>
-        <td align="center"><img src="/static/cam_guided/{{ label }}.png"></td>
+        <td align="center">
+            <div><img src="/static/cam_guided/{{ label }}.png"></div>
+        </td>
     </tr>
 </table>
 {% endblock %}

@@ -5,18 +5,36 @@
     table {
         height: 100%;
         width: 100%;
-        font-size: 4vh;
+        font-size: 5vh;
+    }
+
+    div {
+        display: inline-block;
+        box-shadow: 10px 10px 7px grey;
     }
 </style>
 
 <table>
-    <tr height="15%">
+    <tr height="5%"></tr>
+    <tr height="10%">
         <th>Input Image</th>
     </tr>
-    <tr height="85%">
+    <tr height="80%">
         <td align="center">
-            <img src="/static/images/{{ label }}.jpg" align="middle" width="70%" max-width="90%" max-height="70%">
+            <div><img id="img" src="/static/images/{{ label }}.jpg"></div>
+            <script>
+                img = document.getElementById("img"); 
+                width = img.clientWidth;
+                height = img.clientHeight;
+
+                if (width > height) {
+                    img.style.width = "70%";
+                } else {
+                    img.style.height = "60%";
+                }
+            </script>
         </td>
     </tr>
+    <tr height="5%"></tr>
 </table>
 {% endblock %}

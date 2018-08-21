@@ -103,21 +103,25 @@ def generate_filter_outputs(path_to_image, label):
                     'block5_conv1': 15
                     }
 
-    # Initialize dictionary mapping from layer names to the filter indices to
-    # be processed.
+    # Dictionary mapping from layer names to the 32 filter indices with the
+    # highest gradient visualization activations, which will be processed.
     layer_filter_indices = {
-                            'block1_conv1': [],
-                            'block2_conv1': [],
-                            'block3_conv1': [],
-                            'block4_conv1': [],
-                            'block5_conv1': []
-                            }
-
-    # Add filter indices to layer_filter_indices.
-    for layer in layer_filter_indices.keys():
-        for idx in os.listdir('./app/static/filter_visualizations/'+layer):
-            if not idx.startswith('.'):
-                layer_filter_indices[layer].append(int(idx[:-4]))
+        'block1_conv1': [0, 1, 2, 3, 8, 9, 10, 12, 13, 15, 16, 18, 20, 22, 23,
+                         25, 26, 31, 33, 35, 37, 41, 45, 47, 49, 50, 51, 55,
+                         57, 58, 59, 62],
+        'block2_conv1': [6, 15, 17, 18, 20, 25, 26, 38, 41, 44, 45, 46, 54, 55,
+                         65, 70, 72, 73, 76, 82, 83, 85, 88, 97, 103, 107, 109,
+                         111, 116, 119, 122, 125],
+        'block3_conv1': [3, 4, 6, 11, 14, 15, 23, 33, 36, 41, 50, 65, 77, 94,
+                         104, 123, 126, 128, 137, 141, 143, 161, 170, 187, 197,
+                         203, 208, 218, 222, 236, 238, 254],
+        'block4_conv1': [23, 61, 65, 67, 89, 94, 105, 127, 147, 161, 203, 241,
+                         244, 251, 266, 296, 319, 327, 369, 384, 386, 389, 393,
+                         401, 403, 428, 441, 444, 467, 483, 492, 505],
+        'block5_conv1': [8, 37, 48, 53, 64, 86, 119, 126, 138, 157, 173, 182,
+                         187, 250, 270, 286, 295, 302, 309, 332, 346, 376, 383,
+                         436, 439, 450, 456, 459, 485, 494, 500, 504]
+    }
 
     # Iterate through all layers to consider.
     for layer, indices in layer_filter_indices.items():
@@ -127,6 +131,7 @@ def generate_filter_outputs(path_to_image, label):
         layer_output = visualize_filter_output(label, layer_idx)
 
         # Save output for filter indices in layer.
+        save_idx = 0
         for filter_idx in indices:
             filtered = layer_output[:,:,filter_idx]
             rescaled = (255.0 / filtered.max() * (filtered - filtered.min())).astype(np.uint8)
@@ -136,7 +141,8 @@ def generate_filter_outputs(path_to_image, label):
             path_to_save = './app/static/filter_outputs/'+label+'/'+layer
             if not os.path.exists(path_to_save):
                 os.makedirs(path_to_save)
-            im.save(path_to_save+'/'+str(filter_idx)+'.png')
+            im.save(path_to_save+'/'+str(save_idx)+'.png')
+            save_idx += 1
 
         print("Finished saving filter outputs for " + layer + ".")
     print("Finished saving all filter outputs for " + label + ".")
@@ -272,14 +278,12 @@ def generate_gradcam(path_to_image, label):
 
 
 if __name__ == '__main__':
-    # for image in os.listdir('./app/static/images'):
-    #     if image[0] != '.':
-    #         generate_gradcam('./app/static/images/'+image, image[:-4])
-
     path_to_image = './app/static/images/ball.jpg'
     label = 'ball'
 
     write_vgg16_predictions(path_to_image, label)
     generate_filter_outputs(path_to_image, label)
-    # generate_gradcam(path_to_image, label)
+    generate_gradcam(path_to_image, label)
+
+
 

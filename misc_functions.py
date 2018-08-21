@@ -58,11 +58,11 @@ def parse_layer_info(path):
     f.close()
     return tuple(info)
 
+# Runs the terminal command to execute the javascript file that updates the
+# Data Observatory screens.
+def load_to_gdo(label, layer):
+    os.system("load_to_gdo.js " + label + " " + layer)
 
-# Runs commands to update the screens of the Data Observatory according to the
-# given label and layer.
-def update_screens(label, layer):
-    pass
 
 
 

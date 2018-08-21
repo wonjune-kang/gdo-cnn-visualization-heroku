@@ -45,7 +45,7 @@ def layer_info(layer):
 @app.route('/predictions/<label>', methods=['GET', 'POST'])
 def predictions(label):
     # Parse the top 5 predictions from the predictions text file.
-    predictions = parse_predictions('./app/static/predictions/' + label + '.txt')
+    predictions = parse_predictions('./app/static/predictions/'+label+'.txt')
 
     return render_template('predictions.html', predictions=predictions)
 

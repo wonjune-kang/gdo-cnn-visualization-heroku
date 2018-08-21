@@ -70,8 +70,8 @@ def write_vgg16_predictions(path_to_image, label):
 
     with open('./app/static/predictions/'+label+'.txt', 'w') as f:
         for _, prediction, prob in top5:
-            precentage = ('%.2f' % (prob*100)) + '%'
-            print(prediction+'\t\t'+str(prob), file=f)
+            percentage = ('%.2f' % (prob*100)) + '%'
+            print(prediction+'\t\t'+str(percentage), file=f)
 
     f.close()
     print("Finished writing predictions for " + label + ".")

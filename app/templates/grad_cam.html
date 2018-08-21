@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    table {
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+    }
+
+    th {
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bold;
+        font-size: 3vh;
+    }
+
+    img {
+        width: 50%;
+    }
+</style>
+
+<table>
+    <tr></tr>
+    <tr><th>Gradient-Weighted Class Activation Mapping</th></tr>
+    <tr><th>(Grad-CAM)</th></tr>
+    <tr></tr>
+    <tr>
+        <td align="center"><img src="/static/cam_heatmaps/{{ label }}.png"></td>
+    </tr>
+    <tr>
+        <td align="center"><img src="/static/cam_guided/{{ label }}.png"></td>
+    </tr>
+</table>
+{% endblock %}

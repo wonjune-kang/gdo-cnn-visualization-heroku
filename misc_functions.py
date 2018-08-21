@@ -29,17 +29,24 @@ def get_filter_indices(path):
     return indices
 
 
+# Parses a prediction text file in the static path and returns a list of lists
+# of the form [prediction, probability].
 def parse_predictions(path):
     predictions = []
     with open(path) as f:
         for line in f:
-            to_list = tuple(line.strip().split())
+            to_list = line.strip().split()
             predictions.append(to_list)
-    
     f.close()
+
+    for prediction in predictions:
+        prediction[0] = prediction[0].replace('_', ' ')
+
     return predictions
 
 
+# Parses the layer info text file in the static path and returns a tuple of
+# the information.
 def parse_layer_info(path):
     info = []
     with open(path) as f:
@@ -50,5 +57,13 @@ def parse_layer_info(path):
                 info.append(line.strip())
     f.close()
     return tuple(info)
+
+
+# Runs commands to update the screens of the Data Observatory according to the
+# given label and layer.
+def update_screens(label, layer):
+    pass
+
+
 
 

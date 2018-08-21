@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    table {
+        height: 100%;
+        width: 60%;
+        vertical-align: middle;
+        font-weight: bold;
+        font-size: 4vh;
+    }
+
+    th {
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bold;
+        font-size: 6vh;
+    }
+</style>
+
+<center>
+    <table>
+        <tr></tr>
+        <tr><th colspan="2">Top 5 Predictions</th></tr>
+        {% for prediction, probability in predictions %}
+        <tr>
+            <td>{{ prediction }}</td>
+            <td align="right">{{ probability }}</td>
+        </tr>
+        {% endfor %}
+        <tr></tr>
+        <tr></tr>
+    </table>
+</center>
+{% endblock %}

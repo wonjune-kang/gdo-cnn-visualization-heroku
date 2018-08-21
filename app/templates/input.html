@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    table {
+        height: 100%;
+        width: 100%;
+        font-size: 6vh;
+    }
+
+    img {
+        max-width: 90%;
+        max-height: 70%;
+    }
+</style>
+
+<table>
+    <tr height="15%">
+        <th>Input Image</th>
+    </tr>
+    <tr height="85%">
+        <td align="center">
+            <img src="/static/images/{{ label }}.jpg" align="middle">
+        </td>
+    </tr>
+</table>
+{% endblock %}

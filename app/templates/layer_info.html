@@ -1,18 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <center>
-        <br>
-        <p>Layer: {{ name }}</p>
-        <p>Activation Function: {{ activation }}</p>
-        <p>Number of Filters: {{ num_filters }}</p>
-        <p>Filter Dimensions: {{ dims }}</p>
-        <p>Filter Strides: {{ strides }}</p>
-        <br>
-    </center>
+<style>
+    table {
+        height: 100%;
+        width: 80%;
+        vertical-align: middle;
+        font-weight: bold;
+        font-size: 4vh;
+    }
 
-    <form action="{{ url_for('index') }}" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p align="center">{{ form.return_home }}</p>
-    </form>
+    th {
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bold;
+        font-size: 6vh;
+    }
+</style>
+
+<center>
+    <table>
+        <tr></tr>
+        <tr><th colspan="2">Layer Information</th></tr>
+        <tr>
+            <td>Name</td>
+            <td>{{ name }}</td>
+        </tr>
+        <tr>
+            <td>Activation Function</td>
+            <td>{{ activation }}</td>
+        </tr>
+        <tr>
+            <td>Number of Output Filters</td>
+            <td>{{ num_filters }}</td>
+        </tr>
+        <tr>
+            <td>Filter Dimensions</td>
+            <td>{{ dims }}</td>
+        </tr>
+        <tr>
+            <td>Filter Strides</td>
+            <td>{{ strides }}</td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+</center>
 {% endblock %}

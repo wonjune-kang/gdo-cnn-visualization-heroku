@@ -15,11 +15,4 @@ class SelectionForm(FlaskForm):
                                         ('block4_conv1', 'block4_conv1'),
                                         ('block5_conv1', 'block5_conv1')])
 
-    view = SubmitField("View Selected Image")
-    classify = SubmitField("Classify Selected Image")
-    visualize_filters = SubmitField("Visualize Filters for Layer")
-    layer_info = SubmitField('Layer Info')
-
-
-class ReturnForm(FlaskForm):
-    return_home = SubmitField('Back')
+    view = SubmitField("Visualize")

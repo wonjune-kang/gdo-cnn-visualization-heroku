@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from app import app
-from app.forms import SelectionForm, ReturnForm
+from app.forms import SelectionForm
 from misc_functions import get_filter_indices, parse_predictions, \
                            parse_layer_info, update_screens
 
@@ -37,11 +37,6 @@ def layer_info(layer):
     # Parse the layer specifications from the information text file.
     path_to_info = './app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
-
-    # Return to index page.
-    form = ReturnForm()
-    if form.validate_on_submit():
-        return redirect(url_for('index'))
 
     return render_template('layer_info.html', name=name, activation=activation,
                            num_filters=num_filters, dims=dims, strides=strides)

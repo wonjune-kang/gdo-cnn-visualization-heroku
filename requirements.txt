@@ -17,6 +17,7 @@ kiwisolver==1.0.1
 Mako==1.0.7
 Markdown==2.6.11
 MarkupSafe==1.0
+Naked==0.1.31
 protobuf==3.6.0
 pyparsing==2.2.0
 python-dateutil==2.7.3

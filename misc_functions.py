@@ -1,3 +1,5 @@
+from Naked.toolshed.shell import muterun_js
+import sys
 import os
 
 # Given a path to a directory with images with extensions (.jpg, .png, etc.),
@@ -62,9 +64,11 @@ def parse_layer_info(path):
 # Data Observatory screens.
 def load_to_gdo(label, layer):
     print("Posting to GDO...")
-    os.system("node load_to_gdo.js " + label + " " + layer)
-
-
+    response = muterun_js("./load_to_gdo.js", arguments=label + " " + layer)
+    if response.exitcode == 0:
+        print(response.stdout)
+    else:
+        print(response.stderr)
 
 
 

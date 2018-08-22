@@ -17,16 +17,16 @@
 
 <center>
     <form action="" method="post" novalidate>
-        <!-- <script src="/static/load_gdo.js" label="{{ label }}" layer="{{ layer }}"></script> -->
+        <script src="/static/bundle.js""></script>
         <table>
             <th height="35%">
                 <b>Visualizing Deep Convolutional Neural Networks</b>
             </th>
             {{ form.hidden_tag() }}
 
-            <tr><td><b>Select the image to view:      {{ form.select_image }}</td></tr>
+            <tr><td><b>Select the image to view: {{ form.select_image }}</td></tr>
 
-            <tr><td><b>Select the layer to view:      {{ form.select_layer }}</td></tr>
+            <tr><td><b>Select the layer to view: {{ form.select_layer }}</td></tr>
 
             <tr><td>{{ form.visualize }}</td></tr>
             <tr height="15%"></tr>

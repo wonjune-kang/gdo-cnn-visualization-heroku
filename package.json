@@ -11,5 +11,9 @@
     "visualization"
   ],
   "author": "wonjune-kang",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^16.2.2",
+    "http-browserify": "^1.7.0"
+  }
 }

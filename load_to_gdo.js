@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const GDO_CONTEXT = 'testing';
-const http = require('http');
+var http = require('http');
 
 console.log("Submitting HTTP request...")
 
@@ -125,19 +125,35 @@ function post_filters(label, layer) {
 }
 
 
-var label = process.argv[2]
-var layer = process.argv[3]
+// var label = process.argv[2];
+// var layer = process.argv[3];
 
-console.log(label)
-console.log(layer)
+label = "airplane";
+layer = "block1_conv1"
+
+console.log(label);
+console.log(layer);
 
 post_title()
 console.log("Title posted.")
+
 post_input(label)
 console.log("Input image posted.")
-post_structure()
-post_layer_info(layer)
-post_predictions(label)
-post_gradcam(label)
-post_filters(label, layer)
+
+// post_structure()
+// console.log("Network architecture posted.")
+
+// post_layer_info(layer)
+// console.log("Layer information posted.")
+
+// post_predictions(label)
+// console.log("Top 5 predictions posted.")
+
+// post_gradcam(label)
+// console.log("Grad-CAM posted.")
+
+// post_filters(label, layer)
+// console.log("All filters posted.")
+
+
 

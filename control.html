@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link href="GDOFRAMEWORKSERVER/Bootstrap/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="GDOFRAMEWORKSERVER/Scripts/jquery-2.1.4.min.js"></script>
+    <title></title>
+    <style>
+        .unselectable {
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+        .container {
+            position: absolute;
+            width: 99%;
+            height: 100%;
+            max-width: 99%;
+        }
+        .vizButton {
+            color:white;
+            font-size:large;
+            padding:5px;
+            float:left;
+            width:210px;
+            height:210px;
+            text-align:center;
+            margin:2%;
+            background-color: #555555;
+            cursor: pointer;
+        }
+        .vizButton:hover {
+            background-color: #fba700;
+        }
+        .vizButton > img {
+            width:200px;
+            height:200px;
+        }
+        .vizButton > div {
+            padding-top:10px;
+        }
+    </style>
+</head>
+<body unselectable="on" class="unselectable">
+    <div class="container">
+        <div id="control-div" class="container">
+            <div>
+                <div class="selectField" style="margin:auto">Select an image: </div> 
+                <select>
+                    <option value="airplane">airplane</option>
+                    <option value="apple">apple</option>
+                    <option value="ball">ball</option>
+                    <option value="bridge">bridge</option>
+                    <option value="cat">cat</option>
+                    <option value="cello">cello</option>
+                    <option value="cheetah">cheetah</option>
+                    <option value="coffee">coffee</option>
+                    <option value="dog">dog</option>
+                    <option value="flower">flower</option>
+                    <option value="fox">fox</option>
+                    <option value="goldfish">goldfish</option>
+                    <option value="hummingbird">hummingbird</option>
+                    <option value="lighthouse">lighthouse</option>
+                    <option value="mushroom">mushroom</option>
+                    <option value="orange">orange</option>
+                    <option value="piano">piano</option>
+                    <option value="sailboat">sailboat</option>
+                    <option value="violin">violin</option>
+                    <option value="whale">whale</option>
+                    <option value="wine">wine</option>
+                </select>
+            </div>
+            <div>
+                <div class="selectField" style="margin:auto">Select a layer: </div> 
+                <select>
+                    <option value="block1_conv1">block1_conv1</option>
+                    <option value="block2_conv1">block2_conv1</option>
+                    <option value="block3_conv1">block3_conv1</option>
+                    <option value="block4_conv1">block4_conv1</option>
+                    <option value="block5_conv1">block5_conv1</option>
+                </select>
+            </div>
+            <div class="submitButton" onclick="">
+                <div style="margin:auto">Visualize</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        loadTitle = function() {
+            $.get('GDOFRAMEWORKSERVER/api/GDO/ClearCave');
+            setTimeout(function() {
+                $.post('GDOFRAMEWORKSERVER/api/Section/CreateAndDeploy?colStart=0&rowStart=0&width=5&height=1&appName=StaticHTML');
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        $(function() {
+            loadImage('DSI_creativity.PNG');
+        });
+
+        loadImage = function(name) {
+            $.get('GDOFRAMEWORKSERVER/api/GDO/ClearCave');
+            setTimeout(function(){
+                $.post('GDOFRAMEWORKSERVER/api/Script/RunStep',
+                  { "Mod": "gdo.net.server", "Func": "createSection", "Params": [0, 0, 15, 3], "InstanceId": -1, "DefaultWait": 0, "Id": 1}
+                );
+            }, 1000);
+            setTimeout(function(){
+                $.post('GDOFRAMEWORKSERVER/api/Script/RunStep',
+                  { "Mod": "gdo.net.server", "Func": "deployBaseApp", "Params": [1, "\"Images\"", "\"Default\""], "InstanceId": -1, "DefaultWait": 0, "Id": 2}
+                );
+            }, 1500);
+            setTimeout(function(){
+                $.post('GDOFRAMEWORKSERVER/api/Script/RunMethod',
+                  { "Mod": "gdo.net.app.Images.server", "Func": "displayImage", "Params": [0, "\"" + name + "\"", 0], "InstanceId": 0}
+                );
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

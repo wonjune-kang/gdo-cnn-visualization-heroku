@@ -24,7 +24,7 @@ def index():
         load_to_gdo(label, layer)
         # return render_template('index.html', label=label, layer=layer, form=form)
 
-    return render_template('index.html', label=label, layer=layer, form=form)
+    return render_template('index.html', form=form)
 
 
 # Shows the title page.

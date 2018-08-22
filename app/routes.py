@@ -16,8 +16,8 @@ def index():
     layer = form.select_layer.data
 
     if form.validate_on_submit():
-        label = form.select_image.data
-        layer = form.select_layer.data
+        # label = form.select_image.data
+        # layer = form.select_layer.data
         return render_template('index.html', label=label, layer=layer, form=form)
 
     # return render_template('index.html', form=form)

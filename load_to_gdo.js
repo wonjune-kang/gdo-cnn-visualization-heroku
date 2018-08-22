@@ -3,14 +3,12 @@
 const GDO_CONTEXT = 'testing';
 const http = require('http');
 
-console.log("Submitting HTTP request...")
-
 http.request({
     host: 'dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk',
     path: '/api/GDO/ClearCave'
 }, function(res){}).end();
 
-console.log("HTTP request submitted.")
+console.log("Cleared cave.")
 
 title_url = "https://gdo-cnn-visualization.herokuapp.com/title";
 input_url = "https://gdo-cnn-visualization.herokuapp.com/input/";
@@ -124,46 +122,23 @@ function post_filters(label, layer) {
     }
 }
 
-http.request({
-    method: 'POST',
-    headers: {'Cache-Control': 'no-cache',
-              'Content-Type': 'application/x-www-form-urlencoded'},
-    host: 'dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk',
-    path: '/api/Section/CreateAndDeploy?colStart=0&rowStart=0&width=4&height=4&appName=StaticHTML'},
-    function(res){
-        console.log('Status: ' + res.statusCode.toString().replace('200', 'OK'));
-    }).end('=' + JSON.stringify({"url": "http://www.imperial.ac.uk/",
-                                 "responsiveMode": true}));
 
 // var label = process.argv[2];
 // var layer = process.argv[3];
 
-label = "airplane";
-layer = "block1_conv1"
+var label = "wine";
+var layer = "block4_conv1"
 
 console.log(label);
 console.log(layer);
 
 post_title()
-console.log("Title posted.")
-
 post_input(label)
-console.log("Input image posted.")
-
-post_structure()
-console.log("Network architecture posted.")
-
-post_layer_info(layer)
-console.log("Layer information posted.")
-
-post_predictions(label)
-console.log("Top 5 predictions posted.")
-
-post_gradcam(label)
-console.log("Grad-CAM posted.")
-
-post_filters(label, layer)
-console.log("All filters posted.")
+// post_structure()
+// post_layer_info(layer)
+// post_predictions(label)
+// post_gradcam(label)
+// post_filters(label, layer)
 
 
 

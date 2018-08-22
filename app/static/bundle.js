@@ -2,14 +2,12 @@
 const GDO_CONTEXT = 'testing';
 const http = require('http');
 
-console.log("Submitting HTTP request...")
-
 http.request({
     host: 'dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk',
     path: '/api/GDO/ClearCave'
 }, function(res){}).end();
 
-console.log("HTTP request submitted.")
+console.log("Cleared cave.")
 
 title_url = "https://gdo-cnn-visualization.herokuapp.com/title";
 input_url = "https://gdo-cnn-visualization.herokuapp.com/input/";

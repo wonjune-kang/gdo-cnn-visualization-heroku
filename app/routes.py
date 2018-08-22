@@ -1,6 +1,8 @@
 from flask import render_template, redirect, url_for, request
 from app import app
 from app.forms import SelectionForm
+from rq import Queue
+from worker import conn
 from misc_functions import parse_predictions, parse_layer_info, load_to_gdo
 
 
@@ -17,7 +19,9 @@ def index():
     if form.validate_on_submit():
         label = form.select_image.data
         layer = form.select_layer.data
-        load_to_gdo(label, layer)
+        q = Queue(connection=conn)
+        q.enqueue(load_to_gdo, label, layer)
+        # load_to_gdo(label, layer)
 
     return render_template('index.html', form=form)
 

@@ -1,6 +1,3 @@
-#!/usr/bin/env node
-
-
 const GDO_CONTEXT = 'testing';
 const http = require('http');
 
@@ -129,11 +126,16 @@ function post_filters(label, layer) {
 var label
 var layer
 
+console.log(label)
+console.log(layer)
+
 post_title()
-// post_input(label)
-// post_structure()
-// post_layer_info(layer)
-// post_predictions(label)
-// post_gradcam(label)
-// post_filters(label, layer)
+console.log("Title posted.")
+post_input(label)
+console.log("Input image posted.")
+post_structure()
+post_layer_info(layer)
+post_predictions(label)
+post_gradcam(label)
+post_filters(label, layer)
 

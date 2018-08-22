@@ -9,6 +9,7 @@ http.request({
     path: '/api/GDO/ClearCave'
 }, function(res){}).end();
 
+console.log("HTTP request submitted.")
 
 title_url = "https://gdo-cnn-visualization.herokuapp.com/title";
 input_url = "https://gdo-cnn-visualization.herokuapp.com/input/";

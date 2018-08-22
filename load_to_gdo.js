@@ -123,8 +123,8 @@ function post_filters(label, layer) {
 }
 
 
-var label
-var layer
+var label = process.argv[2]
+var layer = process.argv[3]
 
 console.log(label)
 console.log(layer)

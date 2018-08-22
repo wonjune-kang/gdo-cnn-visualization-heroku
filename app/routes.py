@@ -42,10 +42,15 @@ def layer_info(layer):
     path_to_info = './app/static/layer_info/' + layer + '.txt'
     name, activation, num_filters, dims, strides = parse_layer_info(path_to_info)
 
+    name_to_parsed = {'block1_conv1': "Block 1, Convolution 1",
+                      'block2_conv1': "Block 2, Convolution 1", 
+                      'block3_conv1': "Block 3, Convolution 1",
+                      'block4_conv1': "Block 4, Convolution 1",
+                      'block5_conv1': "Block 5, Convolution 1"}
     dims_to_str = str(dims[0]) + ' x ' + str(dims[1]) + ' x ' + str(dims[2])
     strides_to_str = str(strides[0]) + ' x ' + str(strides[1])
 
-    return render_template('layer_info.html', name=name, activation=activation,
+    return render_template('layer_info.html', name=name_to_parsed[name], activation=activation,
                            num_filters=num_filters, dims=dims_to_str,
                            strides=strides_to_str)
 

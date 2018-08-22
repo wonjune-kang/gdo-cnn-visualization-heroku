@@ -4,6 +4,8 @@
 const GDO_CONTEXT = 'testing';
 const http = require('http');
 
+console.log("Submitting HTTP request...")
+
 http.request({
     host: 'dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk',
     path: '/api/GDO/ClearCave'

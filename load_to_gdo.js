@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const GDO_CONTEXT = 'testing';
 const http = require('http');
 

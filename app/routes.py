@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, request
 from app import app
 from app.forms import SelectionForm
-from rq import Queue
-from worker import conn
+# from rq import Queue
+# from worker import conn
 from misc_functions import parse_predictions, parse_layer_info, load_to_gdo
 
 
@@ -12,18 +12,19 @@ from misc_functions import parse_predictions, parse_layer_info, load_to_gdo
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = SelectionForm()
-    # label = form.select_image.data
-    # layer = form.select_layer.data
+    label = form.select_image.data
+    layer = form.select_layer.data
     # load_to_gdo(label, layer)
 
     if form.validate_on_submit():
         label = form.select_image.data
         layer = form.select_layer.data
-        q = Queue(connection=conn)
-        q.enqueue(load_to_gdo, label, layer)
+        # q = Queue(connection=conn)
+        # q.enqueue(load_to_gdo, label, layer)
         # load_to_gdo(label, layer)
+        return render_template('index.html', label=label, layer=layer, form=form)
 
-    return render_template('index.html', form=form)
+    return render_template('index.html', label=label, layer=layer, form=form)
 
 
 # Shows the title page.

@@ -126,8 +126,8 @@ function post_filters(label, layer) {
 }
 
 
-label = process.argv[2]
-layer = process.argv[3]
+var label
+var layer
 
 post_title()
 // post_input(label)

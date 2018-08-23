@@ -84,11 +84,14 @@
             <br><br><br>
             <button id="submitButton" onclick="postApp(document.getElementById('selectImage').options[selectImage.selectedIndex].value, document.getElementById('selectLayer').options[selectLayer.selectedIndex].value)"><b>VISUALIZE</b></button>
             <br><br><br>
-            <b style="font-size: large">Please wait at least 10 seconds in between visualizations.</b>
+            <b style="font-size: large">Please wait at least 15 seconds in between running visualizations.</b>
         </div>
     </div>
 
     <script>
+        var GDO_CONTEXT = 'prod'
+        var host = 'http://dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk'
+
         var titleURL = "https://gdo-cnn-visualization.herokuapp.com/title";
         var inputURL = "https://gdo-cnn-visualization.herokuapp.com/input/";
         var architectureURL = "https://gdo-cnn-visualization.herokuapp.com/network-structure";
@@ -96,9 +99,6 @@
         var predictionsURL = "https://gdo-cnn-visualization.herokuapp.com/predictions/";
         var gradcamURL = "https://gdo-cnn-visualization.herokuapp.com/grad-cam/";
         var filterURL = "https://gdo-cnn-visualization.herokuapp.com/visualize/";
-
-        var GDO_CONTEXT = 'testing'
-        var host = 'http://dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk'
 
         clearCave = function() {
             $.get(host + '/api/GDO/ClearCave');
@@ -111,8 +111,8 @@
                 headers: {'Cache-Control': 'no-cache',
                           'Content-Type': 'application/x-www-form-urlencoded'},
                 data: '=' + JSON.stringify({"url": titleURL, "responsiveMode": true}),
-                success: function(res){
-                            console.log('Status: ' + res.statusCode);
+                success: function(){
+                            console.log('Status: OK');
                          }
             });
         }
@@ -124,8 +124,8 @@
                 headers: {'Cache-Control': 'no-cache',
                           'Content-Type': 'application/x-www-form-urlencoded'},
                 data: '=' + JSON.stringify({"url": inputURL+label, "responsiveMode": true}),
-                success: function(res){
-                            console.log('Status: ' + res.statusCode);
+                success: function(){
+                            console.log('Status: OK');
                          }
             });
         }
@@ -137,8 +137,8 @@
                 headers: {'Cache-Control': 'no-cache',
                           'Content-Type': 'application/x-www-form-urlencoded'},
                 data: '=' + JSON.stringify({"url": architectureURL, "responsiveMode": true}),
-                success: function(res){
-                            console.log('Status: ' + res.statusCode);
+                success: function(){
+                            console.log('Status: OK');
                          }
             });
         }
@@ -150,8 +150,8 @@
                 headers: {'Cache-Control': 'no-cache',
                           'Content-Type': 'application/x-www-form-urlencoded'},
                 data: '=' + JSON.stringify({"url": layerInfoURL+layer, "responsiveMode": true}),
-                success: function(res){
-                            console.log('Status: ' + res.statusCode);
+                success: function(){
+                            console.log('Status: OK');
                          }
             });
         }
@@ -163,8 +163,8 @@
                 headers: {'Cache-Control': 'no-cache',
                           'Content-Type': 'application/x-www-form-urlencoded'},
                 data: '=' + JSON.stringify({"url": predictionsURL+label, "responsiveMode": true}),
-                success: function(res){
-                            console.log('Status: ' + res.statusCode);
+                success: function(){
+                            console.log('Status: OK');
                          }
             });
         }
@@ -176,8 +176,8 @@
                 headers: {'Cache-Control': 'no-cache',
                           'Content-Type': 'application/x-www-form-urlencoded'},
                 data: '=' + JSON.stringify({"url": gradcamURL+label, "responsiveMode": true}),
-                success: function(res){
-                            console.log('Status: ' + res.statusCode);
+                success: function(){
+                            console.log('Status: OK');
                          }
             });
         }
@@ -193,8 +193,8 @@
                     headers: {'Cache-Control': 'no-cache',
                               'Content-Type': 'application/x-www-form-urlencoded'},
                     data: '=' + JSON.stringify({"url": filterURL+label+'/'+layer+'/'+i, "responsiveMode": true}),
-                    success: function(res){
-                                console.log('Status: ' + res.statusCode);
+                    success: function(){
+                                console.log('Status: OK');
                              }
                 });
 

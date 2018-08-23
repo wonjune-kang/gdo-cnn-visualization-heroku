@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title></title>
+    <style>
+        .container {
+            position: absolute;
+            margin:auto;
+            text-align:center;
+            width: 99%;
+            height: 100%;
+            max-width: 99%;
+        }
+        .selectField {
+            font-family:"Arial";
+            font-size:large;
+        }
+        select {
+            height:60px;
+            width:200px;
+            font-size:large;
+        }
+        button {
+            font-family:"Arial";
+            font-size:large;
+            padding:5px;
+            width:300px;
+            height:150px;
+            text-align:center;
+            margin:auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="control-div" class="container">
+            <div>
+                <br><br><br>
+                <div class="selectField" style="margin:auto">Select an image: </div>
+                <br>
+                <select id="selectImage">
+                    <option value="airplane">airplane</option>
+                    <option value="apple">apple</option>
+                    <option value="ball">ball</option>
+                    <option value="bridge">bridge</option>
+                    <option value="cat">cat</option>
+                    <option value="cello">cello</option>
+                    <option value="cheetah">cheetah</option>
+                    <option value="coffee">coffee</option>
+                    <option value="dog">dog</option>
+                    <option value="flower">flower</option>
+                    <option value="fox">fox</option>
+                    <option value="goldfish">goldfish</option>
+                    <option value="hummingbird">hummingbird</option>
+                    <option value="lighthouse">lighthouse</option>
+                    <option value="mushroom">mushroom</option>
+                    <option value="orange">orange</option>
+                    <option value="piano">piano</option>
+                    <option value="sailboat">sailboat</option>
+                    <option value="violin">violin</option>
+                    <option value="whale">whale</option>
+                    <option value="wine">wine</option>
+                </select>
+            </div>
+            <br><br>
+            <div>
+                <div class="selectField" style="margin:auto">Select a layer: </div>
+                <br>
+                <select id="selectLayer">
+                    <option value="block1_conv1">Block 1, Conv 1</option>
+                    <option value="block2_conv1">Block 2, Conv 1</option>
+                    <option value="block3_conv1">Block 3, Conv 1</option>
+                    <option value="block4_conv1">Block 4, Conv 1</option>
+                    <option value="block5_conv1">Block 5, Conv 1</option>
+                </select>
+            </div>
+            <br><br><br>
+            <button id="submitButton" onclick="postApp(document.getElementById('selectImage').options[selectImage.selectedIndex].value, document.getElementById('selectLayer').options[selectLayer.selectedIndex].value)"><b>VISUALIZE</b></button>
+            <br><br><br>
+            <b style="font-size: large">Please wait at least 10 seconds in between visualizations.</b>
+        </div>
+    </div>
+
+    <script>
+        var titleURL = "https://gdo-cnn-visualization.herokuapp.com/title";
+        var inputURL = "https://gdo-cnn-visualization.herokuapp.com/input/";
+        var architectureURL = "https://gdo-cnn-visualization.herokuapp.com/network-structure";
+        var layerInfoURL = "https://gdo-cnn-visualization.herokuapp.com/info/";
+        var predictionsURL = "https://gdo-cnn-visualization.herokuapp.com/predictions/";
+        var gradcamURL = "https://gdo-cnn-visualization.herokuapp.com/grad-cam/";
+        var filterURL = "https://gdo-cnn-visualization.herokuapp.com/visualize/";
+
+        var GDO_CONTEXT = 'testing'
+        var host = 'http://dsigdo' + GDO_CONTEXT + '.doc.ic.ac.uk'
+
+        clearCave = function() {
+            $.get(host + '/api/GDO/ClearCave');
+        }
+
+        postTitle = function() {
+            $.ajax({
+                url: host + '/api/Section/CreateAndDeploy?colStart=0&rowStart=0&width=5&height=1&appName=StaticHTML',
+                type: 'post',
+                headers: {'Cache-Control': 'no-cache',
+                          'Content-Type': 'application/x-www-form-urlencoded'},
+                data: '=' + JSON.stringify({"url": titleURL, "responsiveMode": true}),
+                success: function(res){
+                            console.log('Status: ' + res.statusCode);
+                         }
+            });
+        }
+
+        postInput = function(label) {
+            $.ajax({
+                url: host + '/api/Section/CreateAndDeploy?colStart=0&rowStart=1&width=2&height=3&appName=StaticHTML',
+                type: 'post',
+                headers: {'Cache-Control': 'no-cache',
+                          'Content-Type': 'application/x-www-form-urlencoded'},
+                data: '=' + JSON.stringify({"url": inputURL+label, "responsiveMode": true}),
+                success: function(res){
+                            console.log('Status: ' + res.statusCode);
+                         }
+            });
+        }
+
+        postArchitecture = function() {
+            $.ajax({
+                url: host + '/api/Section/CreateAndDeploy?colStart=2&rowStart=1&width=3&height=3&appName=StaticHTML',
+                type: 'post',
+                headers: {'Cache-Control': 'no-cache',
+                          'Content-Type': 'application/x-www-form-urlencoded'},
+                data: '=' + JSON.stringify({"url": architectureURL, "responsiveMode": true}),
+                success: function(res){
+                            console.log('Status: ' + res.statusCode);
+                         }
+            });
+        }
+
+        postLayerInfo = function(layer) {
+            $.ajax({
+                url: host + '/api/Section/CreateAndDeploy?colStart=5&rowStart=0&width=1&height=2&appName=StaticHTML',
+                type: 'post',
+                headers: {'Cache-Control': 'no-cache',
+                          'Content-Type': 'application/x-www-form-urlencoded'},
+                data: '=' + JSON.stringify({"url": layerInfoURL+layer, "responsiveMode": true}),
+                success: function(res){
+                            console.log('Status: ' + res.statusCode);
+                         }
+            });
+        }
+
+        postPredictions = function(label) {
+            $.ajax({
+                url: host + '/api/Section/CreateAndDeploy?colStart=5&rowStart=2&width=1&height=2&appName=StaticHTML',
+                type: 'post',
+                headers: {'Cache-Control': 'no-cache',
+                          'Content-Type': 'application/x-www-form-urlencoded'},
+                data: '=' + JSON.stringify({"url": predictionsURL+label, "responsiveMode": true}),
+                success: function(res){
+                            console.log('Status: ' + res.statusCode);
+                         }
+            });
+        }
+
+        postGradcam = function(label) {
+            $.ajax({
+                url: host + '/api/Section/CreateAndDeploy?colStart=6&rowStart=0&width=2&height=4&appName=StaticHTML',
+                type: 'post',
+                headers: {'Cache-Control': 'no-cache',
+                          'Content-Type': 'application/x-www-form-urlencoded'},
+                data: '=' + JSON.stringify({"url": gradcamURL+label, "responsiveMode": true}),
+                success: function(res){
+                            console.log('Status: ' + res.statusCode);
+                         }
+            });
+        }
+
+        postFilters = function(label, layer) {
+            col = 8;
+            row = 0;
+            for (var i = 0; i < 32; i++) {
+                $.ajax({
+                    url: host + '/api/Section/CreateAndDeploy?colStart=' + col +
+                  '&rowStart=' + row + '&width=1&height=1&appName=StaticHTML',
+                    type: 'post',
+                    headers: {'Cache-Control': 'no-cache',
+                              'Content-Type': 'application/x-www-form-urlencoded'},
+                    data: '=' + JSON.stringify({"url": filterURL+label+'/'+layer+'/'+i, "responsiveMode": true}),
+                    success: function(res){
+                                console.log('Status: ' + res.statusCode);
+                             }
+                });
+
+                row++;
+                if (row == 4) {
+                    row = 0;
+                    col++;
+                }
+            }
+        }
+
+        postApp = function(label, layer) {
+            clearCave();
+            postTitle();
+            postInput(label);
+            postArchitecture();
+            postLayerInfo(layer);
+            postPredictions(label);
+            postGradcam(label);
+            postFilters(label, layer);
+        }
+    </script>
+</body>
+</html>
+
+
+

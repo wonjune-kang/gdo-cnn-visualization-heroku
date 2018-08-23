@@ -9,11 +9,7 @@ from misc_functions import parse_predictions, parse_layer_info, load_to_gdo
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = SelectionForm()
-    if form.validate_on_submit():
-        return render_template('index.html', form=form)
-
-    return render_template('index.html', form=form)
+    return render_template('control.html')
 
 
 # Shows the title page.
